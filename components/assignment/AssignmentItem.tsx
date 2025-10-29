@@ -3,9 +3,9 @@ import {View, StyleSheet, Text} from 'react-native';
 function AssignmentItem(props) {
     return (
         <View style={styles.containerItem}>
-            <Text style={styles.heading2}>{props.item.title}</Text>
-            <Text>{props.item.releaseYear}</Text>
-            <Text>Lorie Aguilar</Text>
+            <Text style={styles.heading2}>{props.item.institucion_nombre}</Text>
+            <Text>{props.item.direccion}</Text>
+            <Text>{props.item.contacto_principal}</Text>
         </View>
     );
 }

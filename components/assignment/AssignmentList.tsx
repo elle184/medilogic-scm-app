@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, ScrollView, FlatList, ActivityIndicator } from 'react-native';
-import Movie from '../../type/Movie';
+import Assignment from '../../type/Assignment';
 import AssignmentItem from './AssignmentItem';
 
 function AssignmentList () {
     const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState<Movie[]>([]);
+    const [data, setData] = useState<Assignment[]>([]);
 
     const getAssignments = async () => {
         try {
-            const response = await fetch('https://reactnative.dev/movies.json');
+            const response = await fetch('http://34.8.129.243/api/v1/vendedores/1/clientes');
             const json = await response.json();
-            setData(json.movies);
+            setData(json);
         } catch (error) {
             console.log(error);
         } finally {
