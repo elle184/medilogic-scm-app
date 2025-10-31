@@ -1,21 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View} from 'react-native';
-import AssignmentList from './components/assignment/AssignmentList';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import AssignmentScreen from './screens/AssignmentScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <AssignmentList />
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar style="dark" />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Mis asignaciones" component={AssignmentScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-    , flexDirection: 'column'
-    , backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'}
-});
