@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, ScrollView, FlatList, ActivityIndicator } from 'react-native';
-import Assignment from '../../type/Assignment';
-import AssignmentItem from './AssignmentItem';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
+import Assignment from '../type/Assignment';
+import AssignmentItem from '../components/assignment/AssignmentItem';
 
-function AssignmentList () {
+function AssignmentScreen () {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState<Assignment[]>([]);
 
@@ -24,10 +24,10 @@ function AssignmentList () {
     }, []);
 
     return (
-        <View>
-            <Text style={styles.heading1}>Mis asignaciones</Text>
+        <View style={styles.container}>
             {isLoading ? (<ActivityIndicator />) :
-                (<FlatList data={data} keyExtractor={({id}) => id} 
+                (<FlatList 
+                  data={data} keyExtractor={({id}) => id} 
                     renderItem={({item}) => (
                       <AssignmentItem item={item} />
                     )}
@@ -37,7 +37,7 @@ function AssignmentList () {
     );
 }
 
-export default AssignmentList;
+export default AssignmentScreen;
 
 const styles = StyleSheet.create({
   logo : {
