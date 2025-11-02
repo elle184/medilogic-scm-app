@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import AssignmentScreen from './screens/AssignmentScreen';
 import CreateClientScreen from './screens/CreateClientScreen';
+import ScheduleVisitScreen from './screens/ScheduleVisitScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,9 +13,10 @@ export default function App() {
     <>
       <StatusBar style="dark" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Crear cliente institucional'>
+        <Stack.Navigator initialRouteName='Visitas programadas'>
           <Stack.Screen name="Mis asignaciones" component={AssignmentScreen} />
           <Stack.Screen name="Crear cliente institucional" component={CreateClientScreen} />
+          <Stack.Screen name="Visitas programadas" component={ScheduleVisitScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
