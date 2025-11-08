@@ -1,18 +1,13 @@
-# 🧪 Sistema de Pruebas
+# 🧪 Sistema de Pruebas Automático con GitHub Actions
+
+## 💻 Ejecutar Pruebas Localmente
+
+Si quieres ejecutar las pruebas localmente:
 
 ```bash
-cd /Users/hernandavidalvarezcaballero/Documents/GitHub/medilogic-scm-app
-
 npm install react@18.2.0 react-native@0.72.8
-
 npm install --save-dev react-test-renderer@18.2.0
-
 npm install
-```
-
-### Verificar que funciona:
-
-```bash
 npm test
 ```
 
