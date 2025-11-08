@@ -9,8 +9,9 @@ describe('AppBar Component', () => {
   });
 
   it('should return undefined (empty component)', () => {
-    const { container } = render(<AppBar />);
-    expect(container).toBeTruthy();
+    const result = render(<AppBar />);
+    // AppBar is an empty component, so it returns undefined
+    expect(result).toBeTruthy(); // The render result object exists
   });
 
   it('should not throw errors when rendered', () => {

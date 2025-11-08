@@ -1,5 +1,5 @@
 // Setup for React Native Testing Library
-import '@testing-library/react-native/extend-expect';
+// Note: extend-expect is now built-in to @testing-library/react-native v12+
 
 // Mock expo-status-bar
 jest.mock('expo-status-bar', () => ({

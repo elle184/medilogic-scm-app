@@ -55,13 +55,13 @@ jest.mock('../screens/CreateClientScreen', () => {
 
 describe('App Component', () => {
   it('should render without crashing', () => {
-    const { container } = render(<App />);
-    expect(container).toBeTruthy();
+    const { root } = render(<App />);
+    expect(root).toBeTruthy();
   });
 
   it('should render NavigationContainer', () => {
-    const { container } = render(<App />);
-    expect(container).toBeTruthy();
+    const { root } = render(<App />);
+    expect(root).toBeTruthy();
   });
 
   it('should render StatusBar component', () => {
@@ -77,8 +77,8 @@ describe('App Component', () => {
   });
 
   it('should render Stack Navigator', () => {
-    const { container } = render(<App />);
-    expect(container).toBeTruthy();
+    const { root } = render(<App />);
+    expect(root).toBeTruthy();
   });
 
   it('should configure navigation screens', async () => {
@@ -111,8 +111,8 @@ describe('App Component', () => {
   });
 
   it('should render main container structure', () => {
-    const { container } = render(<App />);
-    expect(container).toBeTruthy();
+    const { root } = render(<App />);
+    expect(root).toBeTruthy();
   });
 });
 

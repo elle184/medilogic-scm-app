@@ -32,8 +32,8 @@ describe('CreateClientScreen', () => {
   });
 
   it('should have correct container styles', () => {
-    const { container } = render(<CreateClientScreen />);
-    expect(container).toBeTruthy();
+    const { root } = render(<CreateClientScreen />);
+    expect(root).toBeTruthy();
   });
 
   it('should render all input labels', () => {
