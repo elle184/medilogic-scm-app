@@ -34,6 +34,7 @@ jobs:
         run: |
           npm install react@18.2.0 react-native@0.72.8
           npm install --save-dev react-test-renderer@18.2.0
+          npm install expo-modules-core@~2.0.0
 
       - name: Run tests with coverage
         run: npm run test:ci
