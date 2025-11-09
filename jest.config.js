@@ -30,6 +30,8 @@ module.exports = {
       statements: 70,
     },
   },
+  coverageReporters: ['text', 'lcov', 'json-summary', 'html'],
+  coverageDirectory: './coverage',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   testMatch: [
     '**/__tests__/**/*.test.[jt]s?(x)',
