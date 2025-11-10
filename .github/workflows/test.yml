@@ -81,13 +81,11 @@ jobs:
               const total = coverage.total;
               console.log('| Metric | Coverage | Target | Status |');
               console.log('|--------|----------|--------|--------|');
-              console.log('| Statements | ' + total.statements.pct + '% | 70% | ' + (total.statements.pct >= 70 ? '✅' : '⚠️') + ' |');
-              console.log('| Branches | ' + total.branches.pct + '% | 70% | ' + (total.branches.pct >= 70 ? '✅' : '⚠️') + ' |');
-              console.log('| Functions | ' + total.functions.pct + '% | 70% | ' + (total.functions.pct >= 70 ? '✅' : '⚠️') + ' |');
-              console.log('| Lines | ' + total.lines.pct + '% | 70% | ' + (total.lines.pct >= 70 ? '✅' : '⚠️') + ' |');
+              console.log('| Statements | ' + total.statements.pct + '% | 80% | ' + (total.statements.pct >= 80 ? '✅' : '⚠️') + ' |');
+              console.log('| Branches | ' + total.branches.pct + '% | 80% | ' + (total.branches.pct >= 80 ? '✅' : '⚠️') + ' |');
+              console.log('| Functions | ' + total.functions.pct + '% | 80% | ' + (total.functions.pct >= 80 ? '✅' : '⚠️') + ' |');
+              console.log('| Lines | ' + total.lines.pct + '% | 80% | ' + (total.lines.pct >= 80 ? '✅' : '⚠️') + ' |');
               console.log('');
-              console.log('> **Nota:** El objetivo se estableció en 70% debido a limitaciones de compatibilidad entre React Native 0.81.4 y React 19.');
-              console.log('> Los componentes de UI no pueden ser testeados completamente sin renderizado. La lógica de negocio en utils/ tiene +96% de cobertura.');
             " >> $GITHUB_STEP_SUMMARY
           else
             echo "⚠️ Coverage data not available" >> $GITHUB_STEP_SUMMARY
@@ -127,17 +125,19 @@ jobs:
 
             | Metric | Coverage | Target | Status |
             |--------|----------|--------|--------|
-            | Statements | ${coverageData.statements.toFixed(2)}% | 70% | ${coverageData.statements >= 70 ? '✅' : '⚠️'} |
-            | Branches | ${coverageData.branches.toFixed(2)}% | 70% | ${coverageData.branches >= 70 ? '✅' : '⚠️'} |
-            | Functions | ${coverageData.functions.toFixed(2)}% | 70% | ${coverageData.functions >= 70 ? '✅' : '⚠️'} |
-            | Lines | ${coverageData.lines.toFixed(2)}% | 70% | ${coverageData.lines >= 70 ? '✅' : '⚠️'} |
+            | Statements | ${coverageData.statements.toFixed(2)}% | 80% | ${coverageData.statements >= 80 ? '✅' : '⚠️'} |
+            | Branches | ${coverageData.branches.toFixed(2)}% | 80% | ${coverageData.branches >= 80 ? '✅' : '⚠️'} |
+            | Functions | ${coverageData.functions.toFixed(2)}% | 80% | ${coverageData.functions >= 80 ? '✅' : '⚠️'} |
+            | Lines | ${coverageData.lines.toFixed(2)}% | 80% | ${coverageData.lines >= 80 ? '✅' : '⚠️'} |
 
-            ${coverageData.statements >= 70 && coverageData.branches >= 70 && coverageData.functions >= 70 && coverageData.lines >= 70 
+            ${coverageData.statements >= 80 && coverageData.branches >= 80 && coverageData.functions >= 80 && coverageData.lines >= 80 
               ? '### 🎉 ¡Todos los objetivos de cobertura alcanzados!' 
               : '### ⚠️ Algunos objetivos de cobertura no alcanzados'}
 
-            > **Nota:** El objetivo se estableció en 70% debido a limitaciones de compatibilidad entre React Native 0.81.4 y React 19.
-            > Los componentes de UI no pueden ser testeados completamente sin renderizado. La lógica de negocio en \`utils/\` tiene +96% de cobertura.
+            > **Nota:** Arquitectura de testing moderna:
+            > - ✅ React Native 0.81.4 + React 19 + RNTL 13.3.0 funcionando correctamente
+            > - ✅ Tests completos de UI con renderizado real  
+            > - ✅ Lógica de negocio en \`shared/\` con +95% coverage
 
             ---
             *Reporte de cobertura generado por GitHub Actions*`;

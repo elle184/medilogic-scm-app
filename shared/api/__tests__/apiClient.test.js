@@ -10,7 +10,7 @@ import {
     createFetchOptions,
     validateResponseData,
     transformAssignmentResponse
-} from '../apiUtils';
+} from '../apiClient';
 
 describe('API Utilities', () => {
     describe('BASE_URL', () => {

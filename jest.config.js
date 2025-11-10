@@ -1,11 +1,17 @@
+/** @type {import('jest').Config} */
 module.exports = {
   preset: 'react-native',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testEnvironment: 'node',
+  setupFiles: [
+    '<rootDir>/node_modules/react-native/jest/setup.js',
+  ],
+  setupFilesAfterEnv: [
+    '<rootDir>/jest.setup.js',
+  ],
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-navigation|@react-native|@react-native-community|expo|@expo|expo-status-bar|react-native-screens|react-native-safe-area-context)/)',
+    'node_modules/(?!(react-native|@react-navigation|@react-native|@react-native-community|expo|@expo|expo-status-bar|react-native-screens|react-native-safe-area-context|react-clone-referenced-element)/)',
   ],
   moduleNameMapper: {
-    '^react-native$': '<rootDir>/__mocks__/react-native.js',
     '\\.(png|jpg|jpeg|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
   },
   collectCoverageFrom: [
@@ -20,14 +26,14 @@ module.exports = {
     '!**/.expo/**',
     '!**/__tests__/**',
     '!**/__mocks__/**',
-    '!**/type/**/*.ts',  // Exclude TypeScript type definitions
+    '!**/type/**/*.ts',
   ],
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
-      statements: 70,
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
     },
   },
   coverageReporters: ['text', 'lcov', 'json-summary', 'html'],
@@ -38,7 +44,6 @@ module.exports = {
     '**/?(*.)+(spec|test).[jt]s?(x)'
   ],
   testPathIgnorePatterns: ['/node_modules/', '/android/'],
-  testEnvironment: 'node',
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },

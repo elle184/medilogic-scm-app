@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 function AppBar({ title }) {
     return (
-        <View style={styles.appBar}>
+        <View style={styles.appBar} testID="appbar">
             <Text style={styles.title}>{title}</Text>
         </View>
     );
