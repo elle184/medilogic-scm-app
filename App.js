@@ -13,11 +13,11 @@ export default function App() {
     <>
       <StatusBar style="dark" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Visitas programadas'>
-          <Stack.Screen name="Mis asignaciones" component={AssignmentScreen} />
-          <Stack.Screen name="Crear cliente institucional" component={CreateClientScreen} />
-          <Stack.Screen name="Visitas programadas" component={ScheduleVisitScreen} />
-        </Stack.Navigator>
+        <Drawer.Navigator>
+          <Drawer.Screen name="Asignaciones" component={AssignmentScreen} />
+          <Drawer.Screen name="Cliente" component={CreateClientScreen} />
+          <Drawer.Screen name="Visitas" component={ScheduleVisitScreen} />
+        </Drawer.Navigator>
       </NavigationContainer>
     </>
   );
