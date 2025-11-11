@@ -1,21 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import AssignmentScreen from './screens/AssignmentScreen';
 import CreateClientScreen from './screens/CreateClientScreen';
+import ScheduleVisitScreen from './screens/ScheduleVisitScreen';
 
-const Stack = createNativeStackNavigator();
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <>
       <StatusBar style="dark" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Crear cliente institucional'>
-          <Stack.Screen name="Mis asignaciones" component={AssignmentScreen} />
-          <Stack.Screen name="Crear cliente institucional" component={CreateClientScreen} />
-        </Stack.Navigator>
+        <Drawer.Navigator>
+          <Drawer.Screen name="Asignaciones" component={AssignmentScreen} />
+          <Drawer.Screen name="Cliente" component={CreateClientScreen} />
+          <Drawer.Screen name="Visitas" component={ScheduleVisitScreen} />
+        </Drawer.Navigator>
       </NavigationContainer>
     </>
   );
