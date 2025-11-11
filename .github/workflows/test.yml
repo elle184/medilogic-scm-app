@@ -139,11 +139,6 @@ jobs:
               ? '### 🎉 ¡Todos los objetivos de cobertura alcanzados!' 
               : '### ⚠️ Algunos objetivos de cobertura no alcanzados'}
 
-            > **Nota:** Arquitectura de testing moderna:
-            > - ✅ React Native 0.81.4 + React 19 + RNTL 13.3.0 funcionando correctamente
-            > - ✅ Tests completos de UI con renderizado real  
-            > - ✅ Lógica de negocio en \`shared/\` con +95% coverage
-
             ---
             *Reporte de cobertura generado por GitHub Actions*`;
 
