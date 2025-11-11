@@ -9,7 +9,7 @@ module.exports = {
     '<rootDir>/jest.setup.js',
   ],
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-navigation|@react-native|@react-native-community|expo|@expo|expo-status-bar|react-native-screens|react-native-safe-area-context|react-clone-referenced-element)/)',
+    'node_modules/(?!(react-native|@react-navigation|@react-native|@react-native-community|expo|@expo|expo-status-bar|react-native-screens|react-native-safe-area-context|react-clone-referenced-element|react-native-reanimated|react-native-gesture-handler|react-native-worklets)/)',
   ],
   moduleNameMapper: {
     '\\.(png|jpg|jpeg|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
