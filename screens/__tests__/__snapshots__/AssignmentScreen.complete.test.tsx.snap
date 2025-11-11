@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AssignmentScreen - Tests completos con React 19 snapshot de la pantalla 1`] = `
+<RCTView
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "center",
+    }
+  }
+>
+  <RCTActivityIndicator />
+</RCTView>
+`;

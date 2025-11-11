@@ -1,0 +1,185 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+      - main
+  push:
+    branches:
+      - develop
+      - master
+      - main
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Clear npm cache
+        run: npm cache clean --force
+
+      - name: Remove node_modules and package-lock
+        run: rm -rf node_modules package-lock.json
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run tests with coverage
+        run: npm run test:ci
+        continue-on-error: true
+        id: tests
+
+      - name: Read coverage summary
+        id: coverage
+        if: always()
+        run: |
+          if [ -f coverage/coverage-summary.json ]; then
+            echo "Coverage file exists"
+            COVERAGE=$(node -e "
+              const fs = require('fs');
+              const coverage = JSON.parse(fs.readFileSync('coverage/coverage-summary.json', 'utf8'));
+              const total = coverage.total;
+              console.log(JSON.stringify({
+                statements: total.statements.pct,
+                branches: total.branches.pct,
+                functions: total.functions.pct,
+                lines: total.lines.pct
+              }));
+            ")
+            echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+          else
+            echo "Coverage file not found"
+            echo "coverage={}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate test summary
+        if: always()
+        run: |
+          echo "## Test Results 🧪" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.tests.outcome }}" == "success" ]; then
+            echo "✅ **All tests passed!**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Some tests failed**" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Coverage Report 📊" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -f coverage/coverage-summary.json ]; then
+            node -e "
+              const fs = require('fs');
+              const coverage = JSON.parse(fs.readFileSync('coverage/coverage-summary.json', 'utf8'));
+              const total = coverage.total;
+              console.log('| Metric | Coverage | Target | Status |');
+              console.log('|--------|----------|--------|--------|');
+              console.log('| Statements | ' + total.statements.pct + '% | 80% | ' + (total.statements.pct >= 80 ? '✅' : '⚠️') + ' |');
+              console.log('| Branches | ' + total.branches.pct + '% | 80% | ' + (total.branches.pct >= 80 ? '✅' : '⚠️') + ' |');
+              console.log('| Functions | ' + total.functions.pct + '% | 80% | ' + (total.functions.pct >= 80 ? '✅' : '⚠️') + ' |');
+              console.log('| Lines | ' + total.lines.pct + '% | 80% | ' + (total.lines.pct >= 80 ? '✅' : '⚠️') + ' |');
+              console.log('');
+            " >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Coverage data not available" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Comment PR
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            
+            let coverageData = { statements: 0, branches: 0, functions: 0, lines: 0 };
+            let testStatus = '${{ steps.tests.outcome }}' === 'success' ? '✅ Passed' : '❌ Failed';
+            
+            try {
+              if (fs.existsSync('coverage/coverage-summary.json')) {
+                const coverage = JSON.parse(fs.readFileSync('coverage/coverage-summary.json', 'utf8'));
+                const total = coverage.total;
+                coverageData = {
+                  statements: total.statements.pct,
+                  branches: total.branches.pct,
+                  functions: total.functions.pct,
+                  lines: total.lines.pct
+                };
+              }
+            } catch (error) {
+              console.log('Could not read coverage data:', error);
+            }
+            
+            const comment = `## Test Results 🧪
+
+            **Status:** ${testStatus}
+
+            ### Coverage Report 📊
+
+            | Metric | Coverage | Target | Status |
+            |--------|----------|--------|--------|
+            | Statements | ${coverageData.statements.toFixed(2)}% | 80% | ${coverageData.statements >= 80 ? '✅' : '⚠️'} |
+            | Branches | ${coverageData.branches.toFixed(2)}% | 80% | ${coverageData.branches >= 80 ? '✅' : '⚠️'} |
+            | Functions | ${coverageData.functions.toFixed(2)}% | 80% | ${coverageData.functions >= 80 ? '✅' : '⚠️'} |
+            | Lines | ${coverageData.lines.toFixed(2)}% | 80% | ${coverageData.lines >= 80 ? '✅' : '⚠️'} |
+
+            ${coverageData.statements >= 80 && coverageData.branches >= 80 && coverageData.functions >= 80 && coverageData.lines >= 80 
+              ? '### 🎉 ¡Todos los objetivos de cobertura alcanzados!' 
+              : '### ⚠️ Algunos objetivos de cobertura no alcanzados'}
+
+            ---
+            *Reporte de cobertura generado por GitHub Actions*`;
+
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && comment.body.includes('Test Results 🧪')
+            );
+
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: comment
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 30
+
+      - name: Fail if tests failed
+        if: steps.tests.outcome != 'success'
+        run: exit 1
+

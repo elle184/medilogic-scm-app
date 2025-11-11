@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input - Tests completos con React 19 snapshot del componente 1`] = `
+<RCTView
+  style={
+    {
+      "marginHorizontal": 4,
+      "marginVertical": 16,
+    }
+  }
+>
+  <RCTText
+    style={
+      {
+        "fontSize": 12,
+        "marginBottom": 4,
+      }
+    }
+  >
+    Test Label
+  </RCTText>
+  <RCTTextInput
+    style={
+      {
+        "borderColor": "#000",
+        "borderRadius": 6,
+        "color": "#000",
+        "fontSize": 18,
+        "padding": 6,
+      }
+    }
+    value="test value"
+  />
+</RCTView>
+`;

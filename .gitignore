@@ -2,9 +2,17 @@
 
 # dependencies
 node_modules/
+.pnp
+.pnp.js
+
+# testing
+coverage/
+*.coverage
+.nyc_output
 
 # Expo
 .expo/
+.expo-shared/
 dist/
 web-build/
 expo-env.d.ts
@@ -17,6 +25,7 @@ expo-env.d.ts
 *.p12
 *.key
 *.mobileprovision
+*.hprof
 
 # Metro
 .metro-health-check*
@@ -25,17 +34,56 @@ expo-env.d.ts
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+lerna-debug.log*
+.pnpm-debug.log*
 
 # macOS
 .DS_Store
 *.pem
+.AppleDouble
+.LSOverride
 
 # local env files
+.env
 .env*.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # typescript
 *.tsbuildinfo
+next-env.d.ts
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Logs
+logs/
+*.log
+
+# Build folders
+build/
+.next/
+out/
 
 # generated native folders
 /ios
 /android
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS files
+Thumbs.db
