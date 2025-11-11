@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateClientForm - Tests completos con React 19 snapshot del formulario 1`] = `
+<RCTView
+  style={
+    {
+      "marginLeft": 20,
+      "marginRight": 20,
+    }
+  }
+>
+  <RCTView
+    style={
+      {
+        "marginHorizontal": 4,
+        "marginVertical": 16,
+      }
+    }
+  >
+    <RCTText
+      style={
+        {
+          "fontSize": 12,
+          "marginBottom": 4,
+        }
+      }
+    >
+      Nombre
+    </RCTText>
+    <RCTTextInput
+      keyboardType="default"
+      onChangeText={[Function]}
+      style={
+        {
+          "borderColor": "#000",
+          "borderRadius": 6,
+          "color": "#000",
+          "fontSize": 18,
+          "padding": 6,
+        }
+      }
+      value=""
+    />
+  </RCTView>
+  <RCTView
+    style={
+      {
+        "marginHorizontal": 4,
+        "marginVertical": 16,
+      }
+    }
+  >
+    <RCTText
+      style={
+        {
+          "fontSize": 12,
+          "marginBottom": 4,
+        }
+      }
+    >
+      NIT
+    </RCTText>
+    <RCTTextInput
+      keyboardType="numeric"
+      onChangeText={[Function]}
+      style={
+        {
+          "borderColor": "#000",
+          "borderRadius": 6,
+          "color": "#000",
+          "fontSize": 18,
+          "padding": 6,
+        }
+      }
+      value=""
+    />
+  </RCTView>
+  <RCTView
+    style={
+      {
+        "marginHorizontal": 4,
+        "marginVertical": 16,
+      }
+    }
+  >
+    <RCTText
+      style={
+        {
+          "fontSize": 12,
+          "marginBottom": 4,
+        }
+      }
+    >
+      Dirección
+    </RCTText>
+    <RCTTextInput
+      keyboardType="default"
+      onChangeText={[Function]}
+      style={
+        {
+          "borderColor": "#000",
+          "borderRadius": 6,
+          "color": "#000",
+          "fontSize": 18,
+          "padding": 6,
+        }
+      }
+      value=""
+    />
+  </RCTView>
+  <RCTView
+    style={
+      {
+        "marginHorizontal": 4,
+        "marginVertical": 16,
+      }
+    }
+  >
+    <RCTText
+      style={
+        {
+          "fontSize": 12,
+          "marginBottom": 4,
+        }
+      }
+    >
+      Nombre contacto
+    </RCTText>
+    <RCTTextInput
+      keyboardType="default"
+      onChangeText={[Function]}
+      style={
+        {
+          "borderColor": "#000",
+          "borderRadius": 6,
+          "color": "#000",
+          "fontSize": 18,
+          "padding": 6,
+        }
+      }
+      value=""
+    />
+  </RCTView>
+  <RCTView
+    style={
+      {
+        "marginHorizontal": 4,
+        "marginVertical": 16,
+      }
+    }
+  >
+    <RCTText
+      style={
+        {
+          "fontSize": 12,
+          "marginBottom": 4,
+        }
+      }
+    >
+      Teléfono contacto
+    </RCTText>
+    <RCTTextInput
+      keyboardType="numeric"
+      onChangeText={[Function]}
+      style={
+        {
+          "borderColor": "#000",
+          "borderRadius": 6,
+          "color": "#000",
+          "fontSize": 18,
+          "padding": 6,
+        }
+      }
+      value=""
+    />
+  </RCTView>
+  <RCTView
+    style={
+      {
+        "marginHorizontal": 4,
+        "marginVertical": 16,
+      }
+    }
+  >
+    <RCTText
+      style={
+        {
+          "fontSize": 12,
+          "marginBottom": 4,
+        }
+      }
+    >
+      E-mail contacto
+    </RCTText>
+    <RCTTextInput
+      keyboardType="email-address"
+      onChangeText={[Function]}
+      style={
+        {
+          "borderColor": "#000",
+          "borderRadius": 6,
+          "color": "#000",
+          "fontSize": 18,
+          "padding": 6,
+        }
+      }
+      value=""
+    />
+  </RCTView>
+  <RCTButton
+    color="#70BBFD"
+    label="Guardar"
+    onPress={[Function]}
+  >
+    Guardar
+  </RCTButton>
+</RCTView>
+`;

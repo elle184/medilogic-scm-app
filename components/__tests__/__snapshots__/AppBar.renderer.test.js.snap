@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppBar - Tests con react-test-renderer snapshot del componente (limitado por incompatibilidad RN 0.81.4 + React 19) 1`] = `null`;
