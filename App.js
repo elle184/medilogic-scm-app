@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import AssignmentScreen from './screens/AssignmentScreen';
 import CreateClientScreen from './screens/CreateClientScreen';
 import ScheduleVisitScreen from './screens/ScheduleVisitScreen';
+import CreateOrderScreen from './screens/CreateOrderScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -17,6 +18,7 @@ export default function App() {
           <Drawer.Screen name="Asignaciones" component={AssignmentScreen} />
           <Drawer.Screen name="Cliente" component={CreateClientScreen} />
           <Drawer.Screen name="Visitas" component={ScheduleVisitScreen} />
+          <Drawer.Screen name="Orden" component={CreateOrderScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
     </>
