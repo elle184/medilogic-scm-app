@@ -23,15 +23,13 @@ function CreateClientForm({submitButtonLabel}) {
 
     async function submitHandler() {
         const clientData = {
-            name : inputValues.name
+            nombre : inputValues.name
             , nit : inputValues.nit
-            , address : inputValues.address
-            , contactName : inputValues.contactName
-            , contactPhoneNumber : inputValues.contactPhoneNumber
-            , contactEmailAddress : inputValues.contactEmailAddress
+            , direccion : inputValues.address
+            , nombre_contacto : inputValues.contactName
+            , telefono_contacto : inputValues.contactPhoneNumber
+            , email_contacto : inputValues.contactEmailAddress
         }
-
-        console.log(inputValues);
 
         const nameIsValid = inputValues.name.trim().length > 0;
         const nitIsValid = !isNaN(inputValues.nit) && inputValues.nit.trim().length > 0;
@@ -51,12 +49,28 @@ function CreateClientForm({submitButtonLabel}) {
                     method : 'POST'
                     , headers : {'Content-Type' : 'application/json'}
                     , body : JSON.stringify({
-                        email: "igoose0@lulu.com",
+                        email: "ilario.goose@gustr.com",
                         password: "12345"})
                 }
             );
-
-            console.log(await responseGenerateToken.json());
+            const responseData = await responseGenerateToken.json();
+            
+            if (null !== responseData.access_token) {
+                console.log('Iniciando el registro del cliente...');
+                console.log(JSON.stringify(clientData));
+                const responseCreateClient = await fetch(
+                    'http://10.0.2.2:8002/api/v1/clientes',
+                    {
+                        method : 'POST',
+                        headers : {
+                            'Content-Type' : 'application/json'
+                            , 'Authorization' : `Bearer ${responseData.token}`
+                        }, 
+                        body : JSON.stringify(clientData)
+                    }
+                );
+                console.log(responseCreateClient.json());
+            }
 
             Alert.alert('Cliente registrado', 'El cliente ha sido registrado en el sistema.');
         }
