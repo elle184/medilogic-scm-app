@@ -21,7 +21,7 @@ function CreateClientForm({submitButtonLabel}) {
         }); 
     }
 
-    function submitHandler() {
+    async function submitHandler() {
         const clientData = {
             name : inputValues.name
             , nit : inputValues.nit
@@ -45,6 +45,19 @@ function CreateClientForm({submitButtonLabel}) {
             Alert.alert('Datos inválidos', 'Verifique la información del cliente.');
             return;
         } else {
+            const responseGenerateToken = await fetch(
+                'http://10.0.2.2:8001/api/v1/users/generate-token'
+                , {
+                    method : 'POST'
+                    , headers : {'Content-Type' : 'application/json'}
+                    , body : JSON.stringify({
+                        email: "igoose0@lulu.com",
+                        password: "12345"})
+                }
+            );
+
+            console.log(await responseGenerateToken.json());
+
             Alert.alert('Cliente registrado', 'El cliente ha sido registrado en el sistema.');
         }
     }
