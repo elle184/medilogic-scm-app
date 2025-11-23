@@ -1,6 +1,7 @@
 import {useState} from 'react';
-import {View, StyleSheet, Text, Button, TextInput} from 'react-native';
+import {View, StyleSheet, Text, Button, TextInput, FlatList} from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import { SelectedProduct } from './SelectedProduct';
 
 const medicamentos = [
   { label: "Acetaminofén", value: "1" },
@@ -20,15 +21,28 @@ const medicamentos = [
   { label: "Ranitidina", value: "15" },
 ];
 
-function CreateClientOrderForm({ navigation }) {
+function CreateClientOrderForm() {
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedProducts, setSelectedProducts] = useState([]);
 
     function productSelectedHandler(productSelected) {
-        console.log(`Producto seleccionado: ${productSelected}`);
         setSelectedProduct(productSelected);
     }
 
-    
+    function addProductHandler() {
+        console.log(`Producto seleccionado: ${selectedProduct}`);
+        setSelectedProducts((currentProducts) => [...selectedProducts, selectedProduct]);
+    }
+
+    function getProduct(productId) {
+        console.log(`Producto a buscar: ${selectedProduct}`);
+        for (let p in medicamentos) {
+            if (productId == medicamentos[p]['value']) {
+                console.log(medicamentos[p]['label']);
+                return medicamentos[p]['label'];
+            }
+        }
+    }
 
     return (
         <View style={styles.formContainer}>
@@ -44,16 +58,27 @@ function CreateClientOrderForm({ navigation }) {
                     style={styles.dropdown}
                     onChange={item => productSelectedHandler(item.value)}
                 />
-                <Button 
-                    title="Validar inventario"
-                    onPress={() => navigation.navigate('StockDetailScreen')}
-                />
             </View>
             <View style={styles.spaceBetweenTop20}></View>
             <View>
-                <Button title="Añadir otro ítem" />
+                <Button title="Añadir otro ítem" onPress={addProductHandler} />
             </View>
             <View style={styles.spaceBetweenTop20}></View>
+            <View>
+                <FlatList 
+                    data={selectedProducts} 
+                    renderItem={(itemData) => {
+                        return (
+                            <View style={styles.inputContainer}>    
+                                <Text key={itemData.item}>{getProduct(itemData.item)}</Text>
+                                <Button 
+                                    title="Validar inventario"
+                                    onPress={() => navigation.navigate('StockDetailScreen')}
+                                />
+                            </View>)
+                    }}
+                    alwaysBounceVertical={false} />
+            </View>
             <View>
                 <Text>Observaciones</Text>
                 <TextInput style={styles.inputObservations} 

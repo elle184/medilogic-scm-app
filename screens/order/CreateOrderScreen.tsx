@@ -1,6 +1,5 @@
 import {View, StyleSheet} from 'react-native';
 import CreateClientOrderForm from '../../components/order/CreateClientOrderForm';
-import Input from '../../components/Input';
 
 function CreateOrderScreen() {
     return (
