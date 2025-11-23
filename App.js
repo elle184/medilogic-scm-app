@@ -17,7 +17,7 @@ export default function App() {
         <Drawer.Navigator>
           <Drawer.Screen name="Asignaciones" component={AssignmentScreen} />
           <Drawer.Screen name="Cliente" component={CreateClientScreen} />
-          <Drawer.Screen name="Visitas programadas" component={ScheduleVisitScreen} />
+          <Drawer.Screen name="ScheduleVisit" component={ScheduleVisitScreen} options={{title : 'Visitas programadas'}} />
           <Drawer.Screen name="Ruta de visitas" component={ViewVisitRouteScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
