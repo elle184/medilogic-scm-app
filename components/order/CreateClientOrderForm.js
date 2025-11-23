@@ -1,7 +1,7 @@
 import {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {View, StyleSheet, Text, Button, TextInput, FlatList} from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { SelectedProduct } from './SelectedProduct';
 
 const medicamentos = [
   { label: "Acetaminofén", value: "1" },
@@ -22,6 +22,7 @@ const medicamentos = [
 ];
 
 function CreateClientOrderForm() {
+    const navigation = useNavigation();
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [selectedProducts, setSelectedProducts] = useState([]);
 
@@ -73,7 +74,11 @@ function CreateClientOrderForm() {
                                 <Text key={itemData.item}>{getProduct(itemData.item)}</Text>
                                 <Button 
                                     title="Validar inventario"
-                                    onPress={() => navigation.navigate('StockDetailScreen')}
+                                    onPress={() => navigation.navigate(
+                                        'NavigableOptions', 
+                                        {
+                                            screen : 'StockDetail',
+                                            params : {productId : itemData.item}})}
                                 />
                             </View>)
                     }}
@@ -106,7 +111,7 @@ const styles = StyleSheet.create({
     },
     dropdown: {
         height: 50,
-        width: '55%',
+        width: '100%',
         borderColor: '#999',
         borderWidth: 1,
         borderRadius: 8,
