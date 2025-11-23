@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import AssignmentScreen from './screens/AssignmentScreen';
 import CreateClientScreen from './screens/CreateClientScreen';
 import ScheduleVisitScreen from './screens/ScheduleVisitScreen';
-import CreateOrderScreen from './screens/CreateOrderScreen';
+import CreateOrderScreen from './screens/order/CreateOrderScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
