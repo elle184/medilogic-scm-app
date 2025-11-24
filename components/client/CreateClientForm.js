@@ -21,17 +21,15 @@ function CreateClientForm({submitButtonLabel}) {
         }); 
     }
 
-    function submitHandler() {
+    async function submitHandler() {
         const clientData = {
-            name : inputValues.name
+            nombre : inputValues.name
             , nit : inputValues.nit
-            , address : inputValues.address
-            , contactName : inputValues.contactName
-            , contactPhoneNumber : inputValues.contactPhoneNumber
-            , contactEmailAddress : inputValues.contactEmailAddress
+            , direccion : inputValues.address
+            , nombre_contacto : inputValues.contactName
+            , telefono_contacto : inputValues.contactPhoneNumber
+            , email_contacto : inputValues.contactEmailAddress
         }
-
-        console.log(inputValues);
 
         const nameIsValid = inputValues.name.trim().length > 0;
         const nitIsValid = !isNaN(inputValues.nit) && inputValues.nit.trim().length > 0;
@@ -45,6 +43,32 @@ function CreateClientForm({submitButtonLabel}) {
             Alert.alert('Datos inválidos', 'Verifique la información del cliente.');
             return;
         } else {
+            const responseGenerateToken = await fetch(
+                'http://34.8.129.243/api/v1/users/generate-token'
+                , {
+                    method : 'POST'
+                    , headers : {'Content-Type' : 'application/json'}
+                    , body : JSON.stringify({
+                        email: "ilario.goose@gustr.com",
+                        password: "12345"})
+                }
+            );
+            const responseData = await responseGenerateToken.json();
+            
+            if (null !== responseData.access_token) {
+                const responseCreateClient = await fetch(
+                    'http://34.8.129.243/api/v1/clientes',
+                    {
+                        method : 'POST',
+                        headers : {
+                            'Content-Type' : 'application/json'
+                            , 'Authorization' : `Bearer ${responseData.access_token}`
+                        }, 
+                        body : JSON.stringify(clientData)
+                    }
+                );
+            }
+
             Alert.alert('Cliente registrado', 'El cliente ha sido registrado en el sistema.');
         }
     }
