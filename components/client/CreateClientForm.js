@@ -45,18 +45,20 @@ function CreateClientForm({submitButtonLabel}) {
         } else {
             const responseGenerateToken = await fetch(
                 'http://34.8.129.243/api/v1/users/generate-token'
+                //'http://10.0.2.2:8001/api/v1/users/generate-token'
                 , {
                     method : 'POST'
                     , headers : {'Content-Type' : 'application/json'}
                     , body : JSON.stringify({
-                        email: "ilario.goose@gustr.com",
-                        password: "12345"})
+                        email: "admin@medisupply.com",
+                        password: "password123"})
                 }
             );
             const responseData = await responseGenerateToken.json();
-            
+            console.log(responseData);
             if (null !== responseData.access_token) {
                 const responseCreateClient = await fetch(
+                    //'http://10.0.2.2:8002/api/v1/clientes',
                     'http://34.8.129.243/api/v1/clientes',
                     {
                         method : 'POST',
@@ -67,8 +69,9 @@ function CreateClientForm({submitButtonLabel}) {
                         body : JSON.stringify(clientData)
                     }
                 );
+                console.log(await responseCreateClient.json());
             }
-
+            
             Alert.alert('Cliente registrado', 'El cliente ha sido registrado en el sistema.');
         }
     }
