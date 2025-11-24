@@ -9,8 +9,8 @@ function AssignmentScreen () {
 
     const getAssignments = async () => {
         try {
-            //const response = await fetch('http://10.0.2.2:8010/api/v1/vendedores/1/clientes');
-            const response = await fetch('http://34.8.129.243/api/v1/vendedores/1/clientes');
+            const response = await fetch('http://10.0.2.2:8010/api/v1/vendedores/1/clientes');
+            //const response = await fetch('http://34.8.129.243/api/v1/vendedores/1/clientes');
             const json = await response.json();
             setData(json);
         } catch (error) {
