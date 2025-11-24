@@ -44,7 +44,7 @@ function CreateClientForm({submitButtonLabel}) {
             return;
         } else {
             const responseGenerateToken = await fetch(
-                'http://10.0.2.2:8001/api/v1/users/generate-token'
+                'http://34.8.129.243/api/v1/users/generate-token'
                 , {
                     method : 'POST'
                     , headers : {'Content-Type' : 'application/json'}
@@ -56,20 +56,17 @@ function CreateClientForm({submitButtonLabel}) {
             const responseData = await responseGenerateToken.json();
             
             if (null !== responseData.access_token) {
-                console.log('Iniciando el registro del cliente...');
-                console.log(JSON.stringify(clientData));
                 const responseCreateClient = await fetch(
-                    'http://10.0.2.2:8002/api/v1/clientes',
+                    'http://34.8.129.243/api/v1/clientes',
                     {
                         method : 'POST',
                         headers : {
                             'Content-Type' : 'application/json'
-                            , 'Authorization' : `Bearer ${responseData.token}`
+                            , 'Authorization' : `Bearer ${responseData.access_token}`
                         }, 
                         body : JSON.stringify(clientData)
                     }
                 );
-                console.log(responseCreateClient.json());
             }
 
             Alert.alert('Cliente registrado', 'El cliente ha sido registrado en el sistema.');
