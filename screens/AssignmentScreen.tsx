@@ -7,12 +7,42 @@ function AssignmentScreen () {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState<Assignment[]>([]);
 
+    async function getToken() {
+        const responseGenerateToken = await fetch(
+            //'http://34.8.129.243/api/v1/users/generate-token'
+            'http://10.0.2.2:8001/api/v1/users/generate-token'
+            , {
+                method : 'POST'
+                , headers : {'Content-Type' : 'application/json'}
+                /*, body : JSON.stringify({
+                    email: "admin@medisupply.com",
+                    password: "password123"})*/
+                , body : JSON.stringify({
+                    email: "irwin.raynard@gustr.com",
+                    password: "12345"})
+            }
+        );
+        return await responseGenerateToken.json();
+    }
+
     const getAssignments = async () => {
         try {
-            //const response = await fetch('http://10.0.2.2:8010/api/v1/vendedores/1/clientes');
-            const response = await fetch('http://34.8.129.243/api/v1/vendedores/1/clientes');
+          console.log(getToken().access_token);
+
+            const response = await fetch(
+              'http://10.0.2.2:8010/api/v1/vendedores/101/clientes',
+              {
+                method : 'GET',
+                headers : {
+                  'Content-Type' : 'application/json',
+                  'Authorization' : `Bearer ${getToken()}`
+                }
+              });
+            //const response = await fetch('http://34.8.129.243/api/v1/vendedores/1/clientes');
             const json = await response.json();
             setData(json);
+
+            console.log(data);
         } catch (error) {
             console.log(error);
         } finally {

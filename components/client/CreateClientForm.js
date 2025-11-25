@@ -55,7 +55,7 @@ function CreateClientForm({submitButtonLabel}) {
                 }
             );
             const responseData = await responseGenerateToken.json();
-            console.log(responseData);
+            
             if (null !== responseData.access_token) {
                 const responseCreateClient = await fetch(
                     //'http://10.0.2.2:8002/api/v1/clientes',
