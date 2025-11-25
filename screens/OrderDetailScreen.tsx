@@ -10,6 +10,7 @@ import {
 import { OrderWithDetails, ProductDetail } from '../type/Order';
 import { OrdenesService } from '../services/ordenes.service';
 import { VehiculosService } from '../services/vehiculos.service';
+import { ProductosService } from '../services/productos.service';
 import OrderHeader from '../components/orders/OrderHeader';
 import OrderMap from '../components/orders/OrderMap';
 import OrderStatusMessage from '../components/orders/OrderStatusMessage';
@@ -49,19 +50,47 @@ const OrderDetailScreen: React.FC<OrderDetailScreenProps> = ({ route, navigation
         }
       }
 
-      // 3. Mapear productos simples a detalles
-      // Usar la información básica que ya viene en la orden
-      const productosDetalles = orderData.productos.map(p => ({
-        id: p.id_producto,
-        id_producto: p.id_producto,
-        nombre_producto: `Producto ${p.id_producto}`, // Solo mostrar ID
-        cantidad: p.cantidad,
-        valor_unitario_usd: 0,
-        subtotal: 0,
-      } as ProductDetail));
-      
-      orderWithDetails.productos_detalles = productosDetalles;
-      orderWithDetails.total = 0;
+      // 3. Obtener detalles completos de los productos
+      try {
+        const productoIds = orderData.productos.map(p => p.id_producto);
+        const productos = await ProductosService.getProductosByIds(productoIds);
+        
+        // Crear un mapa de productos por ID para fácil acceso
+        const productosMap = new Map(productos.map(p => [p.id, p]));
+        
+        // Mapear productos con sus detalles completos
+        const productosDetalles = orderData.productos.map(p => {
+          const productoInfo = productosMap.get(p.id_producto);
+          const valorUnitario = productoInfo?.valor_unitario_usd || 0;
+          const subtotal = valorUnitario * p.cantidad;
+          
+          return {
+            id: p.id_producto,
+            id_producto: p.id_producto,
+            nombre_producto: productoInfo?.nombre_producto || `Producto ${p.id_producto}`,
+            cantidad: p.cantidad,
+            valor_unitario_usd: valorUnitario,
+            subtotal: subtotal,
+          } as ProductDetail;
+        });
+        
+        orderWithDetails.productos_detalles = productosDetalles;
+        orderWithDetails.total = productosDetalles.reduce((sum, p) => sum + p.subtotal, 0);
+      } catch (err) {
+        console.error('Error al obtener detalles de productos:', err);
+        // Si falla, usar datos básicos
+        const productosDetalles = orderData.productos.map(p => ({
+          id: p.id_producto,
+          id_producto: p.id_producto,
+          nombre_producto: `Producto ${p.id_producto}`,
+          cantidad: p.cantidad,
+          valor_unitario_usd: 0,
+          subtotal: 0,
+        } as ProductDetail));
+        
+        orderWithDetails.productos_detalles = productosDetalles;
+        orderWithDetails.total = 0;
+      }
 
       setOrder(orderWithDetails);
     } catch (err) {
