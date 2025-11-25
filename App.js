@@ -87,9 +87,9 @@ function MainNavigation() {
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
       <Drawer.Screen name="Órdenes" component={OrdersStack} />
       <Drawer.Screen name="Mis entregas programadas" component={ScheduledDeliveriesScreen} />
-      <Drawer.Screen name="Asignaciones" component={AssignmentScreen} />
-      <Drawer.Screen name="Cliente" component={CreateClientScreen} />
-      <Drawer.Screen name="Visitas" component={ScheduleVisitScreen} />
+      <Drawer.Screen name="Mis Asignaciones" component={AssignmentScreen} />
+      <Drawer.Screen name="Crear cliente institucional" component={CreateClientScreen} />
+      <Drawer.Screen name="Visitas programadas" component={ScheduleVisitScreen} />
     </Drawer.Navigator>
   );
 }
