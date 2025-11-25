@@ -50,28 +50,50 @@ function CreateClientForm({submitButtonLabel}) {
                     method : 'POST'
                     , headers : {'Content-Type' : 'application/json'}
                     , body : JSON.stringify({
+<<<<<<< HEAD
                         email: "admin@medisupply.com",
                         password: "password123"})
+=======
+                        email: "ilario.goose@gustr.com",
+                        password: "12345"})
+>>>>>>> 383f646 (Se agrega el consumo del servicio de registro de cliente institucional.)
                 }
             );
             const responseData = await responseGenerateToken.json();
             
             if (null !== responseData.access_token) {
+<<<<<<< HEAD
                 const responseCreateClient = await fetch(
                     //'http://10.0.2.2:8002/api/v1/clientes',
                     'http://34.8.129.243/api/v1/clientes',
+=======
+                console.log('Iniciando el registro del cliente...');
+                console.log(JSON.stringify(clientData));
+                const responseCreateClient = await fetch(
+                    'http://10.0.2.2:8002/api/v1/clientes',
+>>>>>>> 383f646 (Se agrega el consumo del servicio de registro de cliente institucional.)
                     {
                         method : 'POST',
                         headers : {
                             'Content-Type' : 'application/json'
+<<<<<<< HEAD
                             , 'Authorization' : `Bearer ${responseData.access_token}`
+=======
+                            , 'Authorization' : `Bearer ${responseData.token}`
+>>>>>>> 383f646 (Se agrega el consumo del servicio de registro de cliente institucional.)
                         }, 
                         body : JSON.stringify(clientData)
                     }
                 );
+<<<<<<< HEAD
                 console.log(await responseCreateClient.json());
             }
             
+=======
+                console.log(responseCreateClient.json());
+            }
+
+>>>>>>> 383f646 (Se agrega el consumo del servicio de registro de cliente institucional.)
             Alert.alert('Cliente registrado', 'El cliente ha sido registrado en el sistema.');
         }
     }
