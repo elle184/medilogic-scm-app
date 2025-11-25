@@ -10,7 +10,7 @@ function AssignmentScreen () {
     async function getToken() {
         const responseGenerateToken = await fetch(
             //'http://34.8.129.243/api/v1/users/generate-token'
-            'http://10.0.2.2:8001/api/v1/users/generate-token'
+            'http://10.0.2.2:8080/api/v1/users/generate-token'
             , {
                 method : 'POST'
                 , headers : {'Content-Type' : 'application/json'}
@@ -30,7 +30,7 @@ function AssignmentScreen () {
           console.log(getToken().access_token);
 
             const response = await fetch(
-              'http://10.0.2.2:8010/api/v1/vendedores/101/clientes',
+              'http://10.0.2.2:8080/api/v1/vendedores/101/clientes',
               {
                 method : 'GET',
                 headers : {

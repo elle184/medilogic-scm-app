@@ -89,7 +89,6 @@ function MainNavigation() {
       <Drawer.Screen name="Mis entregas programadas" component={ScheduledDeliveriesScreen} />
       <Drawer.Screen name="Mis Asignaciones" component={AssignmentScreen} />
       <Drawer.Screen name="Crear cliente institucional" component={CreateClientScreen} />
-      <Drawer.Screen name="Visitas programadas" component={ScheduleVisitScreen} />
     </Drawer.Navigator>
   );
 }
