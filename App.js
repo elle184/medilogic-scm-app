@@ -6,6 +6,7 @@ import CreateClientScreen from './screens/CreateClientScreen';
 import ScheduleVisitScreen from './screens/ScheduleVisitScreen';
 import OrdersListScreen from './screens/OrdersListScreen';
 import OrderDetailScreen from './screens/OrderDetailScreen';
+import ScheduledDeliveriesScreen from './screens/ScheduledDeliveriesScreen';
 import LoginScreen from './screens/LoginScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -85,6 +86,7 @@ function MainNavigation() {
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
       <Drawer.Screen name="Órdenes" component={OrdersStack} />
+      <Drawer.Screen name="Mis entregas programadas" component={ScheduledDeliveriesScreen} />
       <Drawer.Screen name="Asignaciones" component={AssignmentScreen} />
       <Drawer.Screen name="Cliente" component={CreateClientScreen} />
       <Drawer.Screen name="Visitas" component={ScheduleVisitScreen} />
