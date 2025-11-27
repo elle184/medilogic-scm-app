@@ -9,8 +9,8 @@ function AssignmentScreen () {
 
     async function getToken() {
         const responseGenerateToken = await fetch(
-            //'http://34.8.129.243/api/v1/users/generate-token'
-            'http://10.0.2.2:8080/api/v1/users/generate-token'
+            'http://34.8.129.243/api/v1/users/generate-token'
+            //'http://10.0.2.2:8080/api/v1/users/generate-token'
             , {
                 method : 'POST'
                 , headers : {'Content-Type' : 'application/json'}
@@ -27,22 +27,27 @@ function AssignmentScreen () {
 
     const getAssignments = async () => {
         try {
-          console.log(getToken().access_token);
+          // Importar API
+          const api = (await import('../services/api')).default;
+          const tokenResponse = await api.post(
+            '/users/generate-token',
+            {
+              email : 'admin@medisupply.com',
+              password : 'password123'}
+          );
 
             const response = await fetch(
-              'http://10.0.2.2:8080/api/v1/vendedores/101/clientes',
+              'http://34.8.129.243/api/v1/vendedores/101/clientes',
               {
                 method : 'GET',
                 headers : {
                   'Content-Type' : 'application/json',
-                  'Authorization' : `Bearer ${getToken()}`
+                  'Authorization' : `Bearer ${tokenResponse.data.access_token}`
                 }
               });
-            //const response = await fetch('http://34.8.129.243/api/v1/vendedores/1/clientes');
+
             const json = await response.json();
             setData(json);
-
-            console.log(data);
         } catch (error) {
             console.log(error);
         } finally {

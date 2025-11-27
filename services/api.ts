@@ -4,8 +4,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // Lee API_DOMAIN desde variables de entorno (React Native usa process.env con react-native-dotenv)
 // NOTA: Para emulador Android, localhost no funciona. Usar 10.0.2.2
 const baseURL = process.env.REACT_APP_API_DOMAIN ||
-  //"http://34.8.129.243"; // Fallback
-  "http://10.0.2.2:8001"; // Fallback para desarrollo (emulador Android)
+  "http://34.8.129.243"; // Fallback
+  //"http://10.0.2.2:8001"; // Fallback para desarrollo (emulador Android)
 
 const api = axios.create({
   baseURL: baseURL + "/api/v1",
